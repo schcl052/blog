@@ -1,0 +1,38 @@
+<h1>Wall</h1>
+<?php if ($this->error): ?>
+<p class="error">
+There where one or more problems with you submission!
+</p>
+<?php endif ?>
+
+<?php
+    $postForm = $this->postForm;
+    $postForm->prepare();
+    $postForm->setAttribute('action', $this->url('wall',
+        [
+            'action' => 'process'
+        ]
+    ));
+    $postForm->setAttribute('method', 'post');
+    echo $this->form()->openTag($postForm);
+?>
+
+<dl class="zend_form">
+    <dt>
+        <?php echo $this->formLabel($postForm->get('post')); ?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($postForm->get('post'));
+            echo $this->formElementErrors($postForm->get('post'));
+        ?>
+    </dd>
+    <dd>
+        <?php
+            echo $this->formElement($postForm->get('submit'));
+            echo $this->formElementErrors($postForm->get('submit'));
+        ?>
+    </dd>
+</dl>
+
+<?php echo $this->form()->closeTag() ?>
