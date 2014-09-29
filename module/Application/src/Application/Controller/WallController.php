@@ -22,6 +22,7 @@ class WallController extends AbstractActionController
     public function indexAction() {           
         //get form
         $postForm = $this->getServiceLocator()
+                ->get('FormElementManager')
                 ->get('application.form.PostForm');
         
         return new ViewModel(
@@ -59,7 +60,8 @@ class WallController extends AbstractActionController
         } else {        
             //create form and display error
             $postForm = $this->getServiceLocator()
-                ->get('application.form.PostForm');
+                    ->get('FormElementManager')
+                    ->get('application.form.postForm');
         
             $model = new ViewModel(
             [

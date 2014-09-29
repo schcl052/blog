@@ -19,7 +19,7 @@ class AuthenticationController extends AbstractActionController
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction() {
-        $form = $this->getServiceLocator()->get('application.form.loginForm');
+        $form = $this->getServiceLocator()->get('FormElementManager')->get('application.form.loginForm');
         $viewModel = new ViewModel(array('form' => $form));
         
         return $viewModel;

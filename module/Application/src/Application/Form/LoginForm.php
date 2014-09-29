@@ -17,10 +17,10 @@ class LoginForm extends Form
      * construct login form
      * @param string $name
      */
-    public function __construct($name = null) {
-        parent::__construct('Login');
+    public function init($name = null) {
+        //parent::__construct('Login');
         
-        $this->setAttribute('method', 'post');
+        //$this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');
         
         
