@@ -92,6 +92,15 @@ return [
             ],
         ],
     ],
+    'form_elements' => 
+    [
+        'invokables' => 
+        [
+            'application.form.loginForm'    => 'Application\Form\LoginForm',
+            'application.form.registerForm' => 'Application\Form\RegisterForm',
+            'application.form.postForm'     => 'Application\Form\PostForm',
+        ],
+    ],
     'service_manager' => [
         'invokables' =>
         [
@@ -112,7 +121,7 @@ return [
         'abstract_factories' => [
             //'Application\Entity\EntityAbstractFactory',
             'Application\Db\TableAbstractFactory',
-            'Application\Form\FormAbstractFactory',
+            //'Application\Form\FormAbstractFactory',
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ],

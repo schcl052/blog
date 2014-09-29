@@ -15,8 +15,8 @@ class RegisterForm extends LoginForm
      * construct login form
      * @param string $name
      */
-    public function __construct($name = null) {
-        parent::__construct('Register');
+    public function init($name = null) {
+        parent::init('Register');
         
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');

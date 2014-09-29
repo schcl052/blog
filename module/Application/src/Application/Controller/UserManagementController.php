@@ -39,7 +39,7 @@ class UserManagementController extends AbstractActionController
             return $this->redirect()->toUrl('/userManagement');
         } else {
             //load & show form
-            $registerForm = $this->getServiceLocator()->get('application.form.registerForm');
+            $registerForm = $this->getServiceLocator()->get('FormElementManager')->get('application.form.registerForm');
             $viewModel = new ViewModel(array('registerForm' => $registerForm));
         
             return $viewModel;

@@ -8,6 +8,7 @@ use Zend\Form\Form;
  * Description of PostForm
  *
  * @author claude
+ * @package Application\Form
  */
 class PostForm extends Form
 {
@@ -16,10 +17,10 @@ class PostForm extends Form
      * construct post form
      * @param string $name
      */
-    public function __construct($name = null) {
-        parent::__construct('Post');
+    public function init($name = null) {
+        //parent::__construct('Post');
         
-        $this->setAttribute('method', 'post');
+        //$this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');
         
         //post textarea
