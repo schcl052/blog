@@ -1,0 +1,65 @@
+<h1>Register</h1>
+<?php if ($this->error): ?>
+<p class="error">
+The username and/or password is incorrect!
+</p>
+<?php endif ?>
+
+<?php
+    $registerForm = $this->registerForm;
+    $registerForm->prepare();
+    $registerForm->setAttribute('action', $this->url('userManagement',
+        [
+            'action' => 'register'
+        ]
+    ));
+    $registerForm->setAttribute('method', 'post');
+    echo $this->form()->openTag($registerForm);
+?>
+
+<dl class="zend_form">
+    <dt>
+        <?php echo $this->formLabel($registerForm->get('username')); ?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($registerForm->get('username'));
+            echo $this->formElementErrors($registerForm->get('username'));
+        ?>
+    </dd>
+    <dt>
+        <?php echo $this->formLabel($registerForm->get('password'));?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($registerForm->get('password'));
+            echo $this->formElementErrors($registerForm->get('password'));
+        ?>
+    </dd>
+    <dt>
+        <?php echo $this->formLabel($registerForm->get('firstname'));?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($registerForm->get('firstname'));
+            echo $this->formElementErrors($registerForm->get('firstname'));
+        ?>
+    </dd>
+    <dt>
+        <?php echo $this->formLabel($registerForm->get('lastname'));?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($registerForm->get('lastname'));
+            echo $this->formElementErrors($registerForm->get('lastname'));
+        ?>
+    </dd>
+    <dd>
+        <?php
+            echo $this->formElement($registerForm->get('submit'));
+            echo $this->formElementErrors($registerForm->get('submit'));
+        ?>
+    </dd>
+</dl>
+
+<?php echo $this->form()->closeTag() ?>

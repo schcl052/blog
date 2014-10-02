@@ -1,0 +1,47 @@
+<h1>Login</h1>
+<?php if ($this->error): ?>
+<p class="error">
+The username and/or password is incorrect!
+</p>
+<?php endif ?>
+
+<?php
+    $form = $this->form;
+    $form->prepare();
+    $form->setAttribute('action', $this->url('login',
+        [
+            'action' => 'process'
+        ]
+    ));
+    $form->setAttribute('method', 'post');
+    echo $this->form()->openTag($form);
+?>
+
+<dl class="zend_form">
+    <dt>
+        <?php echo $this->formLabel($form->get('username')); ?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($form->get('username'));
+            echo $this->formElementErrors($form->get('username'));
+        ?>
+    </dd>
+    <dt>
+        <?php echo $this->formLabel($form->get('password'));?>
+    </dt>
+    <dd>
+        <?php
+            echo $this->formElement($form->get('password'));
+            echo $this->formElementErrors($form->get('password'));
+        ?>
+    </dd>
+    <dd>
+        <?php
+            echo $this->formElement($form->get('submit'));
+            echo $this->formElementErrors($form->get('submit'));
+        ?>
+    </dd>
+</dl>
+
+<?php echo $this->form()->closeTag() ?>

@@ -20,46 +20,7 @@ return [
                     ],
                 ],
             ],
-            'login' =>
-            [
-                'type' => 'Segment',
-                'options' =>
-                [
-                    'route' => '/login[/:action]',
-                    'defaults' => 
-                    [
-                        'controller' => 'Application\Controller\Authentication',
-                        'action' => 'index',
-                    ],
-                ],                
-            ],
-            'wall' =>
-            [
-                'type' => 'Segment',
-                'options' =>
-                [
-                    'route' => '/wall[/:action]',
-                    'defaults' => 
-                    [
-                        'controller' => 'Application\Controller\Wall',
-                        'action' => 'index',
-                    ],
-                ],
-            ],
-            'userManagement' =>
-            [
-                'type' => 'Segment',
-                'options' =>
-                [
-                    'route' => '/userManagement[/:action]',
-                    'defaults' => 
-                    [
-                        'controller' => 'Application\Controller\UserManagement',
-                        'action' => 'index',
-                    ],
-                ],
-                
-            ],
+            
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -92,39 +53,9 @@ return [
             ],
         ],
     ],
-    'form_elements' => 
-    [
-        'invokables' => 
-        [
-            'application.form.loginForm'    => 'Application\Form\LoginForm',
-            'application.form.registerForm' => 'Application\Form\RegisterForm',
-            'application.form.postForm'     => 'Application\Form\PostForm',
-        ],
-    ],
+    
     'service_manager' => [
-        'invokables' =>
-        [
-            'application.entity.user' => 'Application\Entity\User',
-        ],
-        'factories' =>
-        [
-            'application.service.authServiceFactory' => 'Application\Service\AuthServiceFactory',
-            'application.db.userTableGatewayFactory' => 'Application\Db\UserTableGatewayFactory',
-            'application.db.postTableGatewayFactory' => 'Application\Db\PostTableGatewayFactory',
-            /*'application.entity.user' => function($sm]
-                {
-                    $user = new \Application\Entity\User();
-                    //$user->setProfile($sm->get('application.entity.profile'));
-                    return $user;
-                }*/
-        ],
-        'abstract_factories' => [
-            //'Application\Entity\EntityAbstractFactory',
-            'Application\Db\TableAbstractFactory',
-            //'Application\Form\FormAbstractFactory',
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ],
+        
         'aliases' => [
             'translator' => 'MvcTranslator',
         ],
@@ -144,11 +75,8 @@ return [
         'invokables' => 
         [
             'Application\Controller\Index'          => 'Application\Controller\IndexController',
-            'Application\Controller\Authentication' => 'Application\Controller\AuthenticationController',
-            'Application\Controller\UserManagement' => 'Application\Controller\UserManagementController',
-            'Application\Controller\Wall'           => 'Application\Controller\WallController',
-        ],
-    ],
+        ]
+    ],    
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
