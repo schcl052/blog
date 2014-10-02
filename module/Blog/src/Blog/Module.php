@@ -33,6 +33,10 @@ class Module implements ApigilityProviderInterface
                     $adapter = $sm->get('Zend\Db\Adapter\Adapter');
                     return new \Blog\V1\Rest\Post\PostMapper($adapter);
                 },
+                'Blog\V1\Rest\User\UserMapper' =>  function ($sm) {
+                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    return new \Blog\V1\Rest\User\UserMapper($adapter);
+                },
             ],
         ];
     }
