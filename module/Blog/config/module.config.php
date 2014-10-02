@@ -20,6 +20,46 @@ return array(
                     ),
                 ),
             ),
+            'login' =>
+            [
+                'type' => 'Segment',
+                'options' =>
+                [
+                    'route' => '/login[/:action]',
+                    'defaults' => 
+                    [
+                        'controller' => 'Blog\Controller\Authentication',
+                        'action' => 'index',
+                    ],
+                ],                
+            ],
+            'wall' =>
+            [
+                'type' => 'Segment',
+                'options' =>
+                [
+                    'route' => '/wall[/:action]',
+                    'defaults' => 
+                    [
+                        'controller' => 'Blog\Controller\Wall',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'userManagement' =>
+            [
+                'type' => 'Segment',
+                'options' =>
+                [
+                    'route' => '/userManagement[/:action]',
+                    'defaults' => 
+                    [
+                        'controller' => 'Blog\Controller\UserManagement',
+                        'action' => 'index',
+                    ],
+                ],
+                
+            ],
         ),
     ),
     'zf-versioning' => array(
@@ -28,12 +68,52 @@ return array(
             1 => 'blog.rest.user',
         ),
     ),
+    'form_elements' => 
+    [
+        'invokables' => 
+        [
+            'application.form.loginForm'    => 'Blog\Form\LoginForm',
+            'application.form.registerForm' => 'Blog\Form\RegisterForm',
+            'application.form.postForm'     => 'Blog\Form\PostForm',
+        ],
+    ],
     'service_manager' => array(
-        'factories' => array(
+        'invokables' =>
+        [
+            'application.entity.user' => 'Blog\Entity\User',
+        ],
+        'factories' =>
+        [
             'Blog\\V1\\Rest\\Post\\PostResource' => 'Blog\\V1\\Rest\\Post\\PostResourceFactory',
             'Blog\\V1\\Rest\\User\\UserResource' => 'Blog\\V1\\Rest\\User\\UserResourceFactory',
-        ),
+            'application.service.authServiceFactory' => 'Blog\Service\AuthServiceFactory',
+            'application.db.userTableGatewayFactory' => 'Blog\Db\UserTableGatewayFactory',
+            'application.db.postTableGatewayFactory' => 'Blog\Db\PostTableGatewayFactory',
+            /*'application.entity.user' => function($sm]
+                {
+                    $user = new \Application\Entity\User();
+                    //$user->setProfile($sm->get('application.entity.profile'));
+                    return $user;
+                }*/
+        ],
+        'abstract_factories' => [
+            //'Application\Entity\EntityAbstractFactory',
+            'Blog\Db\TableAbstractFactory',
+            //'Application\Form\FormAbstractFactory',
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+            'Zend\Log\LoggerAbstractServiceFactory',
+        ],
     ),
+    'controllers' => 
+    [
+        'invokables' => 
+        [
+            'Blog\Controller\Index'          => 'Blog\Controller\IndexController',
+            'Blog\Controller\Authentication' => 'Blog\Controller\AuthenticationController',
+            'Blog\Controller\UserManagement' => 'Blog\Controller\UserManagementController',
+            'Blog\Controller\Wall'           => 'Blog\Controller\WallController',
+        ],
+    ],
     'zf-rest' => array(
         'Blog\\V1\\Rest\\Post\\Controller' => array(
             'listener' => 'Blog\\V1\\Rest\\Post\\PostResource',
@@ -169,4 +249,20 @@ return array(
             ),
         ),
     ),
+    'view_manager' => [
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map' => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ],
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+    ],
 );
