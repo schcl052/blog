@@ -7,6 +7,11 @@ use Zend\View\Model\ViewModel;
 use Blog\Entity\Post;
 use Blog\Entity\User;
 
+use Zend\Http\Client\Adapter\Curl;
+use Zend\Http\Request;
+use Zend\Http\Client;
+use Zend\Stdlib\Parameters;
+
 /**
  * Description of WallController
  *
@@ -19,17 +24,50 @@ class WallController extends AbstractActionController
     /**
      * index Action
      */
-    public function indexAction() {           
-        //get form
-        $postForm = $this->getServiceLocator()
-                ->get('FormElementManager')
-                ->get('application.form.PostForm');
+    public function indexAction() {
+        $sessionUser = $this->getServiceLocator()
+                    ->get('application.service.authServiceFactory')
+                    ->getStorage()
+                    ->read()['user'];
         
-        return new ViewModel(
-            [
-                'postForm' => $postForm,
-            ]
-        );
+        $acl = $this->getServiceLocator()
+                ->get('application.acl');
+        
+        if($acl->isAllowed($sessionUser['role'], 'post', 'read')) {
+            //get posts        
+            //Set client
+            $client = new Client();
+            $method = $this->params()->fromQuery('method', 'get');
+            $client->setUri('http://localhost:80'.$this->getRequest()->getBaseUrl().'/post');
+
+            //Set headers
+            $requestHeaders = $client->getRequest()->getHeaders();
+            $headerString = 'Accept: application/json';
+            $requestHeaders->addHeaderLine($headerString);
+
+            //get REST reponse
+            $response = $client->send();
+            $posts = json_decode($response->getBody());
+
+            $postForm = null;
+            if($acl->isAllowed($sessionUser['role'], 'post', 'write')) {
+                //get form
+                $postForm = $this->getServiceLocator()
+                        ->get('FormElementManager')
+                        ->get('application.form.PostForm');
+            }
+
+            return new ViewModel(
+                [
+                    'postForm' => $postForm,
+                    'posts'    => $posts->_embedded->post,
+                ]
+            );
+        } else {
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate('error/accessDenied');
+            return $viewModel;
+        }
     }
     
     /**

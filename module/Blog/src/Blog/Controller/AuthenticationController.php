@@ -51,6 +51,7 @@ class AuthenticationController extends AbstractActionController
                     [
                         'id'       => $user->getId(),
                         'username' => $user->getUsername(),
+                        'role'     => $user->getRole(),
                     ]
                 ]
             );            

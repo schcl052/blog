@@ -2,6 +2,7 @@
 namespace Blog;
 
 use ZF\Apigility\Provider\ApigilityProviderInterface;
+use Zend\Mvc\MvcEvent;
 
 class Module implements ApigilityProviderInterface
 {

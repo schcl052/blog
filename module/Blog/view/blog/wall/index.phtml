@@ -3,9 +3,19 @@
 <p class="error">
 There where one or more problems with you submission!
 </p>
-<?php endif ?>
+<?php endif; ?>
+<?php foreach($this->posts as $post): ?>
+<p id="post<?=$post->idPost;?>">
+    <?php
+        echo $post->dtText;
+    ?>
+    <br>By User <?= $post->fiUser; ?> on <?= $post->dtDate; ?>
+</p>
+<hr>
+<?php endforeach; ?>
 
 <?php
+    if($this->postForm):
     $postForm = $this->postForm;
     $postForm->prepare();
     $postForm->setAttribute('action', $this->url('wall',
@@ -36,3 +46,4 @@ There where one or more problems with you submission!
 </dl>
 
 <?php echo $this->form()->closeTag() ?>
+<?php endif; ?>

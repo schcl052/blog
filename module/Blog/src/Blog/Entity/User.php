@@ -32,6 +32,12 @@ class User
     protected $id;
     
     /**
+     * role
+     * @var string 
+     */
+    protected $role;
+    
+    /**
      * profile
      * @var Blogofile
      */
@@ -118,8 +124,31 @@ class User
         return $this->profile;
     }
     
+    /**
+     * Get Role
+     * @return string
+     */
+    public function getRole() {
+        return $this->role;
+    }
+
+    /**
+     * Set Role
+     * @param string $role
+     * @return \Blog\Entity\User
+     */
+    public function setRole($role) {
+        $this->role = $role;
+        return $this;
+    }
+
+    /**
+     * Exchange Array
+     * @param type $data
+     */
     public function exchangeArray($data){
         $this->username = isset($data['username'])?$data['username']: null;        
         $this->id = isset($data['idUser'])?$data['idUser']: null;
+        $this->role = isset($data['dtRole'])?$data['dtRole']: null;
     }
 }
