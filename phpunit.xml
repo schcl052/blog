@@ -21,6 +21,9 @@
         <testsuite name="Application">
             <directory suffix=".php">module/Application/tests/ApplicationTest</directory>
         </testsuite>
+        <testsuite name="Blog">
+            <directory suffix=".php">module/Blog/tests/BlogTest</directory>
+        </testsuite>
     </testsuites>
     <logging>
         <log type="coverage-html" target="build/reports/phpunit/coverage" charset="UTF-8"/>
@@ -33,6 +36,7 @@
             <directory suffix=".php">../src</directory>
             <exclude>
                 <directory suffix=".php">../src/Application/Controller</directory>
+                <directory suffix=".php">../src/Blog/Controller</directory>
             </exclude>
         </whitelist>
     </filter>

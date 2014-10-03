@@ -122,7 +122,7 @@ class PostEntity
      * initalize a object with an array
      * @param array $data
      */
-    public function exchangeArray($data) {
+    public function exchangeArray(array $data) {
         $this->idPost   = $data['idPost'];
         $this->text     = $data['dtText'];
         $this->dateTime = $data['dtDate'];

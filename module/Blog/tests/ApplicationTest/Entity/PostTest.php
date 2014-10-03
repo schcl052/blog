@@ -52,9 +52,6 @@ class PostTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($fixture, $this->instance->getDateTime());
     }
     
-    /**
-     * Test Get Set User
-     */
     public function testGetSetUser() {
         $fixture = $this->getMock('Application\\Entity\\User');
         
@@ -63,3 +60,5 @@ class PostTest extends \PHPUnit_Framework_TestCase
     }
     
 }
+
+?>
